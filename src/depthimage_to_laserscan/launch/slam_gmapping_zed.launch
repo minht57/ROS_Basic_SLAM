@@ -1,0 +1,137 @@
+<launch>
+
+<group ns="zed">
+    <arg name="svo_file"              default="/media/silent/minhtri_hdd/ROSBAGS/HD720_SN3442_23-26-28.svo" /><!-- <arg name="svo_file" default="path/to/svo/file.svo"> -->
+    <arg name="zed_id"                default="0" />
+    <!-- GPU ID-->
+    <arg name="gpu_id"                default="-1" />
+    <!-- Definition coordinate frames -->
+    <arg name="publish_tf"            default="true" />
+    <arg name="odometry_frame"        default="odom" />
+    <arg name="base_frame"            default="zed_center" />
+    <arg name="camera_frame"          default="zed_left_camera" />
+    <arg name="depth_frame"           default="zed_depth_camera" />
+    <!-- Publish urdf zed -->
+    <arg name="publish_urdf"          default="true" />
+
+    <node name="zed_wrapper_node" pkg="zed_wrapper" type="zed_wrapper_node" output="screen">
+
+        <!-- publish odometry frame -->
+        <param name="publish_tf"            value="$(arg publish_tf)" />
+        <!-- Configuration frame camera -->    
+        <param name="odometry_frame"        value="$(arg odometry_frame)" />
+        <param name="base_frame"            value="$(arg base_frame)" />
+        <param name="camera_frame"          value="$(arg camera_frame)" />
+        <param name="depth_frame"           value="$(arg depth_frame)" />
+    
+        <!-- SVO file path -->
+        <param name="svo_filepath"          value="$(arg svo_file)" />
+
+        <!-- ZED parameters -->
+        <param name="zed_id"                value="$(arg zed_id)" />
+
+        <param name="resolution"            value="3" />
+        <param name="quality"               value="2" />
+        <param name="sensing_mode"          value="0" />
+        <param name="frame_rate"            value="30" />
+        <param name="odometry_db"           value="" />
+        <param name="openni_depth_mode"     value="0" />
+        <param name="gpu_id"                value="$(arg gpu_id)" />
+        <param name="confidence"            value="100" />
+        <param name="depth_stabilization"   value="1" />
+
+        <!-- ROS topic names -->
+        <param name="rgb_topic"             value="rgb/image_rect_color" />
+        <param name="rgb_raw_topic"         value="rgb/image_raw_color" />
+        <param name="rgb_cam_info_topic"    value="rgb/camera_info" />
+
+        <param name="left_topic"            value="left/image_rect_color" />
+        <param name="left_raw_topic"        value="left/image_raw_color" />
+        <param name="left_cam_info_topic"   value="left/camera_info" />
+    
+        <param name="right_topic"           value="right/image_rect_color" />
+        <param name="right_raw_topic"       value="right/image_raw_color" />
+        <param name="right_cam_info_topic"  value="right/camera_info" />
+
+        <param name="depth_topic"           value="depth/depth_registered" />
+        <param name="depth_cam_info_topic"  value="depth/camera_info" />
+
+        <param name="point_cloud_topic"     value="point_cloud/cloud_registered" />
+
+        <param name="odometry_topic"        value="odom" />
+
+    </node>
+
+    <!-- Depth_image to Laser_Scan -->
+    <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+            <param name="scan_height" value="50"/>
+            <param name="output_frame_id" value="/base_frame"/>
+            <param name="range_min" value="0.3"/>
+            <param name="range_max" value="2"/>
+            <remap from="image" to="/zed/depth/depth_registered"/>
+	    <remap from="scan" to ="/scan"/>
+     </node>
+
+    <!-- ROS URDF description of the ZED -->
+    <group if="$(arg publish_urdf)">
+        <param name="zed_description" textfile="$(find zed_wrapper)/urdf/zed.urdf" />
+        <node name="zed_state_publisher" pkg="robot_state_publisher" type="state_publisher">
+            <remap from="robot_description" to="zed_description" />
+        </node>
+    </group>
+
+</group>
+
+<!-- Depth_image to Laser_Scan -->
+<!--node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+        <param name="scan_height" value="50"/>
+        <param name="output_frame_id" value="/base_frame"/>
+        <param name="range_min" value="0.3"/>
+        <param name="range_max" value="2"/>
+        <remap from="image" to="/zed/depth/image_rect_color"/>
+	<remap from="scan" to ="/scan"/>
+ </node-->
+
+<!-- Laser Scan Match -->
+<!--node pkg="laser_scan_matcher" type="laser_scan_matcher_node" name="laser_scan_matcher_node" output="screen">
+
+    <param name="fixed_frame" value = "odom"/>
+    <param name="base_frame" value="base_frame"/>
+    <param name="use_alpha_beta" value="false"/>
+    <param name="use_odom" value="false"/>
+    <param name="use_imu" value="false"/>
+    <param name="max_iterations" value="10"/>
+    <param name="publish_pose" value="true"/>
+    <param name="publish_tf" value="true"/>
+    <param name="use_vel" value="false"/>
+	
+ </node-->
+
+
+<!-- TF frame relationship -->
+
+<!--node pkg="tf" type="static_transform_publisher" name="base_to_laser"
+  args="0 0 0 0 0 0 1 base_frame zed_initial_frame 100" /-->
+
+<!--node pkg="tf" type="static_transform_publisher" name="base_to_camera"
+  args="0 0 0 0 0 0 1 base_frame camera_frame 100" /-->
+
+<!--node pkg="tf" type="static_transform_publisher" name="map_to_base"
+  args="0 0 0 0 0 0 1 map base_frame 100" /-->
+
+<node pkg="tf" type="static_transform_publisher" name="map_to_base"
+  args="0 0 0 0 0 0 1 base_frame odom 100" />
+
+<!-- Gmapping -->
+
+ <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <param name="map_udpate_interval" value="5.0"/>
+    <param name="delta" value="0.02"/>
+    <param name="base_frame" value="base_frame"/>
+ </node> 
+
+
+<!--RVIZ launch -->
+    <node pkg="rviz" type="rviz" name="rviz" />
+
+</launch>

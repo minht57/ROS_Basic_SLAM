@@ -1,0 +1,85 @@
+<launch>
+
+    <!--node name="zed_wrapper_node" pkg="zed_wrapper" type="zed_wrapper_node" output="screen">
+
+      <param name="resolution"            value="1" />
+      <param name="quality"               value="1" />
+      <param name="sensing_mode"          value="1" />
+      <param name="frame_rate"            value="10" />
+      <param name="odometry_DB"           value="" />
+      <param name="openni_depth_mode"     value="0" />
+
+      <param name="rgb_topic"             value="rgb/image_rect_color" />
+      <param name="rgb_cam_info_topic"    value="rgb/camera_info" />
+      <param name="rgb_frame_id"          value="/base_frame" />
+
+      <param name="left_topic"            value="left/image_rect_color" />
+      <param name="left_cam_info_topic"   value="left/camera_info" />
+      <param name="left_frame_id"         value="/base_frame" />
+
+      <param name="right_topic"           value="right/image_rect_color" />
+      <param name="right_cam_info_topic"  value="right/camera_info" />
+      <param name="right_frame_id"        value="/base_frame" />
+
+      <param name="depth_topic"           value="depth/image_rect_color" />
+      <param name="depth_cam_info_topic"  value="depth/camera_info" />
+      <param name="depth_frame_id"        value="/base_frame" />
+
+      <param name="point_cloud_topic"     value="point_cloud/cloud" />
+      <param name="cloud_frame_id"        value="/base_frame" />
+
+      <param name="odometry_topic"                value="odom" />
+      <param name="odometry_frame_id"             value="/zed_initial_frame" />
+      <param name="odometry_transform_frame_id"   value="/base_frame" /-->
+
+
+    <!--/node-->
+
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+	<!--remap from="scan" to="tri_scan"/-->
+	<remap from="scan" to="/scan"/>
+	<remap from="image" to="/zed/depth/depth_registered"/>
+	<remap from="camera_info" to="/zed/depth/camera_info"/>
+  </node>
+
+  <node pkg="gmapping" name="slam_gmapping" type="slam_gmapping" output="screen">
+    <param name="delta" value="0.05"/>
+    <param name="xmin" value="-20"/>
+    <param name="xmax" value="20"/>
+    <param name="ymin" value="-20"/>
+    <param name="ymax" value="20"/>
+    <remap from="scan" to="/scan"/>
+    <param name="base_frame" value="base_link" />
+
+    <param name="linearUpdate" value="0.5"/>
+    <param name="angularUpdate" value="0.436"/>
+    <param name="temporalUpdate" value="-1.0"/>
+    <param name="resampleThreshold" value="0.5"/>
+    <param name="particles" value="80"/>
+
+    <param name="base_frame" value="base_frame"/>
+
+  </node>
+
+<!-- TF frame relationship -->
+
+<node pkg="tf" type="static_transform_publisher" name="base_to_laser"
+  args="0 0 0 0 0 0 1 base_frame zed_initial_frame 100" />
+
+<!-- Laser Scan Match -->
+<node pkg="laser_scan_matcher" type="laser_scan_matcher_node" name="laser_scan_matcher_node" output="screen">
+
+    <param name="fixed_frame" value = "odom"/>
+    <param name="base_frame" value="base_frame"/>
+    <param name="use_alpha_beta" value="false"/>
+    <param name="use_odom" value="false"/>
+    <param name="use_imu" value="false"/>
+    <param name="max_iterations" value="10"/>
+    <param name="publish_pose" value="true"/>
+    <param name="publish_tf" value="true"/>
+    <param name="use_vel" value="false"/>
+	
+ </node>
+
+
+</launch>
