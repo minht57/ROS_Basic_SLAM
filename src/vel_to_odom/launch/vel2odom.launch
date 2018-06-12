@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="vel_to_odom" type="vel2odom_node" name="vel_to_odom"  output="screen">
+    <param name="odom_topic" value="/odom"/>
+    <param name="cmd_vel_topic" value="/cmd_vel"/>
+
+    <param name="dt" value="0.2"/>
+    <param name="child_frame_id" value="/base_frame"/>
+    <param name="frame_id" value="/odom"/>
+    <param name="publish_odom" value="true"/>
+  </node>
+</launch>
