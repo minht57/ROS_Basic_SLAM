@@ -1,0 +1,7 @@
+image: /home/minht57/dev/robot_ws/map_test_8.pgm
+resolution: 0.050000
+origin: [-42.400000, -45.600000, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

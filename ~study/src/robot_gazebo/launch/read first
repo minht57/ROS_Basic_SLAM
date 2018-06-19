@@ -1,0 +1,3 @@
+rosrun gazebo_ros spawn_model -file `rospack find robot_description`/urdf/mybot.xacro -urdf -x 0 -y 0 -z 1 -model myrobot
+
+rosrun gazebo_ros gzserver 
