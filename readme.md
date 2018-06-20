@@ -3,6 +3,7 @@
 
 ## Overview
 
+
 ## Algorithm
 ![Algorithm](https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/bot.png)
 
@@ -30,17 +31,12 @@ sudo apt install ros-kinetic-<dependencies_name>
 ```
 ## Build and run the robot
 
-First, we need to change mode for the packages:
-
-```
- sudo chmod 777 ~/catkin_ws/src/zed-ros-wapper/cfg/Zed.cfg
- sudo chmod 777 ~/catkin_ws/src/depthimage_to_laserscan/cfg/Depth.cfg
- ```
-
 ### Setup workspace:
 ```
 git clone https://github.com/minht57/ROS_Basic_SLAM.git
-cp -f ROS_Basic_SLAM/src/* ~/catkin_ws/src/
+cp -rf ROS_Basic_SLAM/src/* ~/catkin_ws/src/
+sudo chmod 777 ~/catkin_ws/src/zed-ros-wapper/cfg/Zed.cfg
+sudo chmod 777 ~/catkin_ws/src/depthimage_to_laserscan/cfg/Depth.cfg
 cd ~/catkin_ws
 catkin_make
 ```
