@@ -94,7 +94,9 @@ Place a box in the area to check object avoidance algorithm.
 
 Open Rviz:
 
-```rviz```
+```
+rviz
+```
 
 <p align="center">
   <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/nav01.png">
