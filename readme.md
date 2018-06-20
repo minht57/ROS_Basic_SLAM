@@ -51,6 +51,7 @@ Run the mapping:
 roslaunch depthimage_to_laserscan gmapping.launch
 ```
 Use RF controller to move the robot around. The map will be automatically built.
+
 To see the map, launch Rviz and create visualization by adding 'Map' to the Display console:
 ```
 rviz
