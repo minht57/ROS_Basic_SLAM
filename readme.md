@@ -112,7 +112,7 @@ Open Rviz:
   <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/nav04.png">
 </p>
 
-### Result:
+## Result:
 Youtube:
  - Mapping:  [here
 ](https://www.youtube.com/watch?v=OGnmODjk6VQ)
