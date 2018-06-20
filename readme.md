@@ -1,5 +1,10 @@
+
  
 # BUILDING AN AUTOMATIC VEHICLE BASED ON STEREO CAMERA
+
+<p align="center">
+  <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/robot.png">
+</p>
 
 ## Overview
 The goal of this project is to build a map of surrounding area and autonomosly control a robot to the pointed destination in the map. The robot is a Turtlebot model and base on ROS (Robot Operating System). This project focuses on using Sereo camera to reduce the cost. Robot can build a map, navigate and go to destinated position, which can be futher developed to go around a house doing diffrent tasks or exploring unknown enviroment. 
@@ -41,39 +46,65 @@ cd ~/catkin_ws
 catkin_make
 ```
 ### Mapping:
+Run the mapping:
 ```
 roslaunch depthimage_to_laserscan gmapping.launch
+```
+Use RF controller to move the robot around. The map will be automatically built.
+To see the map, launch Rviz and create visualization by adding 'Map' to the Display console:
+```
 rviz
 ```
-[Picture]
-
-Use RF controller to build your map and save your map using this command
+Save map:
 ```
 rosrun map_server map_saver -f ~/catkin_ws/test_map
 ```
+Raw map:
+<p align="center">
+  <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/map.png">
+</p>
 
-[Picture]
+Filter the map using GIMP:
+<p align="center">
+  <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/editedmap.png">
+</p>
 
 ### Navigation:
 
-Running navigation using this command:
+Run navigation:
 
 ```
 roslaunch navigation slam_amcl.launch
 ```
-
-[Picture]
-
-Send velocity commands via Serial to move base:
+Send velocity commands via serial port to move base:
 ```
 sudo chmod 777 /dev/ttyUSB0
 roslaunch serial serial.launch
 ```
 
+Place a box in the area to check object avoidance algorithm.
+<p align="center">
+  <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/navImage.jpg">
+</p>
+
 Open Rviz:
 ```rviz```
 
-[Picture]
+<p align="center">
+  <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/nav01.png">
+</p>
+
+<p align="center">
+  <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/nav02.png">
+</p>
+
+<p align="center">
+  <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/nav03.png">
+</p>
+
+<p align="center">
+  <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/nav04.png">
+</p>
 
 ### Result:
 Youtube:
