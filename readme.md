@@ -3,7 +3,7 @@
 # BUILDING AN AUTOMATIC VEHICLE BASED ON STEREO CAMERA
 
 <p align="center">
-  <img src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/robot.png">
+  <img width="360" height="240" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/robot.png">
 </p>
 
 ## Overview
@@ -81,6 +81,10 @@ Send velocity commands via serial port to move base:
 sudo chmod 777 /dev/ttyUSB0
 roslaunch serial serial.launch
 ```
+
+<p align="center">
+  <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/navImage01.jpg">
+</p>
 
 Place a box in the area to check object avoidance algorithm.
 <p align="center">
