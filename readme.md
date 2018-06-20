@@ -3,7 +3,7 @@
 # BUILDING AN AUTOMATIC VEHICLE BASED ON STEREO CAMERA
 
 <p align="center">
-  <img width="360" height="240" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/robot.png">
+  <img width="240" height="360" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/robot.png">
 </p>
 
 ## Overview
@@ -92,6 +92,7 @@ Place a box in the area to check object avoidance algorithm.
 </p>
 
 Open Rviz:
+
 ```rviz```
 
 <p align="center">
