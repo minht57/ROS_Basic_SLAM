@@ -2,7 +2,7 @@
 # BUILDING AN AUTOMATIC VEHICLE BASED ON STEREO CAMERA
 
 ## Overview
-The goal of this project is to build a map of surrounding area and control a robot autonomosly to the pointed destination in the map. The robot is a Turtlebot model and base on ROS (Robot Operating System).This project focusing on using Sereo camera to reduce the cost. Robot can build a map, navigation and go to destinated position, which can be developed to go around a house doing diffrent tasks or exploring unknown enviroment. 
+The goal of this project is to build a map of surrounding area and control a robot autonomosly to the pointed destination in the map. The robot is a Turtlebot model and base on ROS (Robot Operating System). This project focusing on using Sereo camera to reduce the cost. Robot can build a map, navigation and go to destinated position, which can be futher developed to go around a house doing diffrent tasks or exploring unknown enviroment. 
 
 ## Algorithm
 ![Algorithm](https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/bot.png)
