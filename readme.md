@@ -58,7 +58,9 @@ rosrun map_server map_saver -f ~/catkin_ws/test_map
 
 Running navigation using this command:
 
-```roslaunch navigation slam_amcl.launch```
+```
+roslaunch navigation slam_amcl.launch
+```
 
 [Picture]
 
