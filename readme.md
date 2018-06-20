@@ -46,10 +46,12 @@ roslaunch depthimage_to_laserscan gmapping.launch
 rviz
 ```
 [Picture]
+
 Use RF controller to build your map and save your map using this command
 ```
 rosrun map_server map_saver -f ~/catkin_ws/test_map
 ```
+
 [Picture]
 
 ### Navigation:
@@ -57,6 +59,7 @@ rosrun map_server map_saver -f ~/catkin_ws/test_map
 Running navigation using this command:
 
 ```roslaunch navigation slam_amcl.launch```
+
 [Picture]
 
 Send velocity commands via Serial to move base:
@@ -67,6 +70,7 @@ roslaunch serial serial.launch
 
 Open Rviz:
 ```rviz```
+
 [Picture]
 
 ### Result:
