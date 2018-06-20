@@ -3,7 +3,7 @@
 # BUILDING AN AUTOMATIC VEHICLE BASED ON STEREO CAMERA
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/robot.png">
+  <img src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/robot.png">
 </p>
 
 ## Overview
