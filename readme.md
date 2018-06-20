@@ -27,7 +27,7 @@ In order to run the project, the following dependencies are required:
 
 Install ROS package dependencies:
 ```
-sudo apt install ros-kinetic-<dependencies_name>
+sudo apt install ros-kinetic-<dependency_name>
 ```
 ## Build and run the robot
 
