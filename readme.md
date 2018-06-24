@@ -15,11 +15,12 @@ This project focuses on using stereo camera to build a vehicle which can map the
 ## Dependencies
 In order to run the project, the following dependencies are required:
 
- - Ubuntu 16.04 [here](http://cdimage.ubuntu.com/netboot/16.04/?_ga=2.243318149.1855666904.1529366501-828848615.1529366501)
+- Ubuntu 16.04 [here](http://cdimage.ubuntu.com/netboot/16.04/?_ga=2.243318149.1855666904.1529366501-828848615.1529366501)
 - ROS Kinetic Kame [here](http://wiki.ros.org/kinetic/Installation/Ubuntu)
 - Catkin tool [here](http://wiki.ros.org/catkin)
 - ZED SDK (version 2.1) [here](https://www.stereolabs.com/developers/release/2.1/)
 - Cuda Toolkit (version 8.0) [here](https://developer.nvidia.com/cuda-80-ga2-download-archive)
+- Firmware for Mobile base [here](https://github.com/minht57/STM32F4_BaseControl)
 - ROS packages:
 	- zed_ros_wrapper
 	- depthimage_to_laserscan
