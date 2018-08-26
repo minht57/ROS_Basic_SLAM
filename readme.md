@@ -66,7 +66,7 @@ Raw map:
   <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/map.png">
 </p>
 
-Filter the map with GIMP:
+Edit the map with GIMP for better map:
 <p align="center">
   <img width="460" height="300" src="https://github.com/minht57/ROS_Basic_SLAM/blob/master/img/editedmap.png">
 </p>
